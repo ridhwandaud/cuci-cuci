@@ -10,6 +10,8 @@ angular.module('dashboard.controller', [])
     { name: 'Cowbell', id: 6 }
   ];
 
+  $scope.currentTime = moment().format("Do MMMM YYYY, h:mm:ss a");
+
   $scope.shouldShowDelete = true;
 
   $scope.createNewBooking = function(booking)
@@ -29,6 +31,11 @@ angular.module('dashboard.controller', [])
   {
     alert("onHold")
   }
+
+  $scope.doRefresh = function() {
+    $scope.currentTime = moment().format("Do MMMM YYYY, h:mm:ss a");
+    $scope.$broadcast('scroll.refreshComplete');
+  };
 
   $scope.showLoading = function() {
     $ionicLoading.show({

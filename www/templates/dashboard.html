@@ -1,5 +1,9 @@
 <ion-view view-title="Dashboard">
-  <ion-content>
+  <ion-content class="has-header">
+  	<ion-refresher
+    pulling-text="Pull to refresh..."
+    on-refresh="doRefresh()">
+  </ion-refresher>
     <ion-list>
       <ion-item ng-repeat="booking in bookings"
       	can-swipe="listCanSwipe"
@@ -8,7 +12,7 @@
 
         {{booking.name}}
         <ion-option-button class="button-info"
-                       ng-click="edit($index)">
+                       ng-click="edit(booking)">
 	      Edit
 	    </ion-option-button>
 	    <ion-delete-button class="ion-minus-circled"
@@ -16,6 +20,7 @@
     	</ion-delete-button>
       </ion-item>
     </ion-list>
+    <p>Last updated on : {{currentTime}}</p>
   </ion-content>
   <div class="bar bar-footer bar-balanced">
     <div class="title" ng-click="openModalBooking()">New Book</div>
@@ -32,7 +37,7 @@
       	<h1 class="title">Add New Booking</h1>
       	<button class="button button-clear button-positive" ng-click=closeModal()>Edit</button>
     </ion-header-bar>
-    <ion-content>
+    <ion-content class="header">
       	<div class="list">
 			<label class="item item-input">
 			<input type="text" placeholder="First Name" ng-model="booking.name">
