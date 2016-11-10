@@ -1,9 +1,51 @@
 <ion-view view-title="Dashboard">
   <ion-content>
     <ion-list>
-      <ion-item ng-repeat="playlist in playlists" href="#/app/dashboard/{{playlist.id}}">
-        {{playlist.title}}
+      <ion-item ng-repeat="booking in bookings"
+      	can-swipe="listCanSwipe"
+       	zhref="#/app/dashboard/{{booking.id}}" 
+       	zon-hold="onHold()">
+
+        {{booking.name}}
+        <ion-option-button class="button-info"
+                       ng-click="edit($index)">
+	      Edit
+	    </ion-option-button>
+	    <ion-delete-button class="ion-minus-circled"
+                       ng-click="items.splice($index, 1)">
+    	</ion-delete-button>
       </ion-item>
     </ion-list>
   </ion-content>
+  <div class="bar bar-footer bar-balanced">
+    <div class="title" ng-click="openModalBooking()">New Book</div>
+  </div>
 </ion-view>
+
+
+
+<!-- Modal -->
+
+<script id="booking-modal.html" type="text/ng-template">
+  <ion-modal-view>
+    <ion-header-bar>
+      	<h1 class="title">Add New Booking</h1>
+      	<button class="button button-clear button-positive" ng-click=closeModal()>Edit</button>
+    </ion-header-bar>
+    <ion-content>
+      	<div class="list">
+			<label class="item item-input">
+			<input type="text" placeholder="First Name" ng-model="booking.name">
+			</label>
+			<label class="item item-input">
+			<input type="text" placeholder="Email" ng-model="booking.email">
+			</label>
+			<button class="button button-full button-positive" ng-click="createNewBooking(booking)">
+				Submit
+			</button>
+		</div>
+    </ion-content>
+  </ion-modal-view>
+</script>
+
+<!-- End Modal -->
