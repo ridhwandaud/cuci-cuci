@@ -10,7 +10,7 @@
        	zhref="#/app/dashboard/{{booking.id}}" 
        	zon-hold="onHold()">
 
-        {{booking.name}}
+        {{booking.title}}
         <ion-option-button class="button-info"
                        ng-click="edit(booking)">
 	      Edit
@@ -40,10 +40,10 @@
     <ion-content class="header">
       	<div class="list">
 			<label class="item item-input">
-			<input type="text" placeholder="First Name" ng-model="booking.name">
+			<input type="text" placeholder="First Name" ng-model="booking.title" name="title">
 			</label>
 			<label class="item item-input">
-			<input type="text" placeholder="Email" ng-model="booking.email">
+			<input type="text" placeholder="Email" ng-model="booking.email" name="email">
 			</label>
 			<button class="button button-full button-positive" ng-click="createNewBooking(booking)">
 				Submit

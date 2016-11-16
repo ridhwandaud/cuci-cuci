@@ -1,38 +1,33 @@
 angular.module('dashboard.controller', [])
 
-.controller('DashboardCtrl', function($scope,$ionicLoading,$q,$ionicModal) {
-  $scope.bookings = [
-    { name: 'Reggae', id: 1 },
-    { name: 'Chill', id: 2 },
-    { name: 'Dubstep', id: 3 },
-    { name: 'Indie', id: 4 },
-    { name: 'Rap', id: 5 },
-    { name: 'Cowbell', id: 6 }
-  ];
-
-  $scope.currentTime = moment().format("Do MMMM YYYY, h:mm:ss a");
-
-  $scope.shouldShowDelete = true;
+.controller('DashboardCtrl', function($scope,$ionicLoading,$q,$ionicModal,$http) {
 
   $scope.createNewBooking = function(booking)
   {
-    //call modal 
-    $scope.bookings.push({name:booking.name});
-    $scope.showLoading();
+     // $http.post("http://localhost:8000/cards/store&title="+booking.name).then(function(data)
+    $http.post("http://localhost:8000/cards/store",booking).then(function(data)
+     {
+        //refresh list
+        $scope.doRefresh();
+        $scope.closeModal();
+     })
+    // $scope.bookings.push({name:booking.name});
+    // $scope.showLoading();
   }
 
   $scope.edit = function(index)
   {
     // $scope.bookings.splice(booking.id, 1)
-    alert(index);
-  }
-
-  $scope.onHold = function()
-  {
-    alert("onHold")
+    // alert(index);
   }
 
   $scope.doRefresh = function() {
+    $http.get("http://localhost:8000/cards").then(function(data)
+    {
+      console.log(data);
+      $scope.bookings = data.data;
+    })
+
     $scope.currentTime = moment().format("Do MMMM YYYY, h:mm:ss a");
     $scope.$broadcast('scroll.refreshComplete');
   };
@@ -51,6 +46,8 @@ angular.module('dashboard.controller', [])
        console.log("The loading indicator is now hidden");
     });
   };
+
+  $scope.doRefresh();
 
 
 
@@ -83,3 +80,5 @@ angular.module('dashboard.controller', [])
   //End modal booking
 
 })
+
+// angular.module("token").constant("CSRF_TOKEN", '{{ csrf_token() }}');     

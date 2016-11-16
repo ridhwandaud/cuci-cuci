@@ -8,7 +8,7 @@ angular.module('starter', [
   'ionic', 
   'dashboard.controller',
   'menu.controller',
-  'details.controller'
+  'details.controller',
   ])
 
 .run(function($ionicPlatform) {
