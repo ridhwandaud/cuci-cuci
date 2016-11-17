@@ -1,11 +1,11 @@
 angular.module('dashboard.controller', [])
 
-.controller('DashboardCtrl', function($scope,$ionicLoading,$q,$ionicModal,$http) {
+.controller('DashboardCtrl', function($scope,$ionicLoading,$q,$ionicModal,$http,SERVER_CONFIG) {
 
   $scope.createNewBooking = function(booking)
   {
      // $http.post("http://localhost:8000/cards/store&title="+booking.name).then(function(data)
-    $http.post("http://localhost:8000/create/booking",booking).then(function(data)
+    $http.post(SERVER_CONFIG.api_path+"/create/booking",booking).then(function(data)
      {
         //refresh list
         $scope.doRefresh();
@@ -22,7 +22,7 @@ angular.module('dashboard.controller', [])
   }
 
   $scope.doRefresh = function() {
-    $http.get("http://localhost:8000/show/booking").then(function(data)
+    $http.get(SERVER_CONFIG.api_path+"/show/booking").then(function(data)
     {
       console.log(data);
       $scope.bookings = data.data;
