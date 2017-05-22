@@ -1,18 +1,18 @@
-<ion-view view-title="Dashboard">
+<ion-view view-title="Task">
   <ion-content class="has-header">
   	<ion-refresher
     pulling-text="Pull to refresh..."
     on-refresh="doRefresh()">
   </ion-refresher>
     <ion-list>
-      <ion-item ng-repeat="booking in bookings"
+      <ion-item ng-repeat="task in tasks"
       	can-swipe="listCanSwipe"
-       	zhref="#/app/dashboard/{{booking.id}}" 
-       	zon-hold="onHold()">
+       	href="#/app/dashboard/{{task.id}}" 
+       	on-hold="onHold()">
 
-        {{booking.title}}
+        {{task.name}}
         <ion-option-button class="button-info"
-                       ng-click="edit(booking)">
+                       ng-click="edit(task)">
 	      Edit
 	    </ion-option-button>
 	    <ion-delete-button class="ion-minus-circled"
@@ -20,10 +20,9 @@
     	</ion-delete-button>
       </ion-item>
     </ion-list>
-    <p>Last updated on : {{currentTime}}</p>
   </ion-content>
   <div class="bar bar-footer bar-balanced">
-    <div class="title" ng-click="openModalBooking()">New Book</div>
+    <div class="title" ng-click="openModalTask()">New Task</div>
   </div>
 </ion-view>
 
@@ -31,24 +30,21 @@
 
 <!-- Modal -->
 
-<script id="booking-modal.html" type="text/ng-template">
+<script id="task-modal.html" type="text/ng-template">
   <ion-modal-view>
     <ion-header-bar>
-      	<h1 class="title">Add New Booking</h1>
-      	<button class="button button-clear button-positive" ng-click=closeModal()>Edit</button>
+      	<h1 class="title">Add New task</h1>
+      	<button class="button button-clear button-positive" ng-click=closeModal()>X</button>
     </ion-header-bar>
     <ion-content class="header">
       	<div class="list">
-			<label class="item item-input">
-			<input type="text" placeholder="First Name" ng-model="booking.title" name="title">
-			</label>
-			<label class="item item-input">
-			<input type="text" placeholder="Email" ng-model="booking.email" name="email">
-			</label>
-			<button class="button button-full button-positive" ng-click="createNewBooking(booking)">
-				Submit
-			</button>
-		</div>
+    			<label class="item item-input">
+    			 <input type="text" placeholder="Create Task" ng-model="task.name" name="title">
+    			</label>
+    			<button class="button button-full button-positive" ng-click="createNewTask(task)">
+    				Submit
+    			</button>
+    		</div>
     </ion-content>
   </ion-modal-view>
 </script>
