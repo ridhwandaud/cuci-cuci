@@ -7,12 +7,11 @@
     <ion-list>
       <ion-item ng-repeat="task in tasks"
       	can-swipe="listCanSwipe"
-       	href="#/app/dashboard/{{task.id}}" 
        	on-hold="onHold()">
 
         {{task.name}}
         <ion-option-button class="button-info"
-                       ng-click="edit(task)">
+                       ng-click="edit(task.id)">
 	      Edit
 	    </ion-option-button>
 	    <ion-delete-button class="ion-minus-circled"

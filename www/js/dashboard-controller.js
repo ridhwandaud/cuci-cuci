@@ -1,6 +1,6 @@
 angular.module('dashboard.controller', [])
 
-.controller('DashboardCtrl', function($scope,$ionicLoading,$q,$ionicModal,$http,SERVER_CONFIG) {
+.controller('DashboardCtrl', function($scope,$ionicLoading,$q,$ionicModal,$http,SERVER_CONFIG,$state) {
 
   $scope.createNewTask = function(task)
   {
@@ -46,6 +46,10 @@ angular.module('dashboard.controller', [])
 
   $scope.onHold = function(){
   	alert("testing");	
+  }
+
+  $scope.edit = function(id){
+    $state.go('app.details',{token:id});
   }
 
   $scope.doRefresh();
